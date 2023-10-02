@@ -1,0 +1,132 @@
+body{
+    height: 100%;
+}
+p{
+    font-size:20px;
+}
+
+.navbar-brand{
+   font-family: 'Lilita One';
+   color: #E9C46A;
+   font-size: 30px;
+
+}
+.navbar-nav{
+    color:#E9C46A;
+
+}
+
+.navbar-nav li a{
+    color:#E9C46A;
+    font-size: 20px;
+}
+.item{
+    /* display:flex; */
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar{
+    background-color:#2A9D8F;
+    position: relative;
+    /* border-radius: 0px 0px 15px 15px; */
+    font-family: 'Lilita One';
+
+}
+
+/* .container-fluid{
+    background-color:#2A9D8F;
+    position: relative;
+    border-radius: 0px 0px 15px 15px;
+} */
+.container{
+    margin-top: 20px;
+    background-color: #E76F51;
+    /* padding: 200px; */
+    font-family: 'Lilita One';
+    color: white;
+    border-radius: 50px;
+    width: 50%;
+    position: relative;
+}
+
+
+.table{
+    padding-left: 20px;
+    margin-top: 20px;
+
+    /* padding: 200px; */
+    font-family: 'Lilita One';
+    color: white;
+    border-radius: 50px;
+    width: 80%;
+    height: 100%;
+    padding: 20px;
+}
+
+
+
+.containerr{
+    padding-left: 20px;
+    margin-top: 20px;
+    background-color: #E76F51;
+    /* padding: 200px; */
+    font-family: 'Lilita One';
+    color: white;
+    border-radius: 50px;
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+}
+
+
+.form-floating p {
+
+    margin-top: 10%;
+
+}
+
+.form-signin {
+    position: relative;
+    width: 530px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+
+
+}
+
+.marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  /* rtl:begin:ignore */
+  .marketing .col-lg-4 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+  }
+
+  .form-signin .form-floating:focus-within {
+    z-index: 2;
+  }
+
+  /* .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  } */
+
+  .form-control{
+    margin-bottom: 10px;
+  }
+
+.btn{
+    background-color: #E9C46A;
+}
+
