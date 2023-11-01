@@ -3,32 +3,33 @@
 
 @section('container')
     @include('layouts.caraousel')
+
     <div
         style="width: 100%; display:flex; justify-content:center; align-items:center; margin-top:-120px;  position: absolute;">
         <div class="containerr">
             <h1>Keberangkatan</h1>
-            <form class="row g-4">
+            <form class="row g-4" action="/list-keberangkatan" method="get">
                 <div class="col-md-3">
                     <label for="inputEmail4" class="form-label">Dari</label>
-                    <select id="inputState" class="form-select">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                    <select id="inputState" class="form-select" name="from">
+                        <option value="Banda Aceh">Banda Aceh</option>
+                        <option value="Medan">Medan</option>
                     </select>
                 </div>
                 <div class="col-md-3">
                     <label for="inputPassword4" class="form-label">Ke</label>
-                    <select id="inputState" class="form-select">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                    <select id="inputState" class="form-select" name="to">
+                        <option value="Banda Aceh">Banda Aceh</option>
+                        <option value="Medan">Medan</option>
                     </select>
                 </div>
                 <div class="col-3">
                     <label for="inputAddress" class="form-label">Tanggal Berangkat</label>
-                    <input type="date" class="form-control" id="inputAddress">
+                    <input type="date" class="form-control" id="inputAddress" name="date">
                 </div>
                 <div class="col-1">
                     <label for="inputAddress2" class="form-label">Penumpang</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="">
+                    <input type="text" class="form-control" id="inputAddress2" placeholder="" name="penumpang">
                 </div>
 
                 <div class="col-12">
@@ -69,7 +70,7 @@
                 <h2 class="fw-normal">Pembayaran Banyak Jenis</h2>
             </div><!-- /.col-lg-4 -->
 
-        </div><!-- /.row -->
+        </div><!-- /.row -->keberangkatan
         <div class="card-group">
             <div class="card">
                 <img src="image/BANDA.jpg" class="card-img-top" alt="..." style="width: 600px; height:300px">

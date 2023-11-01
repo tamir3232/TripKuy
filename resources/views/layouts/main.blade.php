@@ -7,7 +7,7 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
@@ -17,7 +17,15 @@
 
     <nav class="navbar navbar-expand-lg " style="background-color: #2A9D8F;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">TripKuy</a>
+            @auth
+                @if (auth()->user()->role == '1')
+                    <a class="navbar-brand" href="/">TripKuy</a>
+                @else
+                    <a class="navbar-brand" href="/admin">TripKuy</a>
+                @endif
+
+            @endauth
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -27,11 +35,11 @@
                     @auth
                         @if (auth()->user()->role == '1')
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="/Ticket">My Ticket</a>
+                                <a class="nav-link" aria-current="page" href="/my-ticket">My Ticket</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="/Ticket">Order</a>
+                                <a class="nav-link" aria-current="page" href="/keberangkatan">Keberangkatan</a>
                             </li>
                         @endif
 

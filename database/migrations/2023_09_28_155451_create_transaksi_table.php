@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('transaksi', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('code')->unique();
-            $table->string('status');
-            $table->uuid('user_id');
-            $table->uuid('keberangkatan_id');
+            $table->string('status')->nullable();
+            $table->uuid('user_id')->nullable();
+            $table->uuid('keberangkatan_id')->nullable();
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

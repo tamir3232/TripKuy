@@ -1,47 +1,41 @@
 <?php
 
-namespace App\Http\Controllers\Keberangkatan;
+namespace App\Http\Controllers\Penumpang;
 
 use App\Http\Controllers\Controller;
 use App\Models\keberangkatan;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-
-
-class KeberangkatanController extends Controller
+class ListKeberangkatanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user = Auth::id();
+        $keberangkatan = keberangkatan::where('from', $request->from)->where('to', $request->to)->where('date', $request->date)->get();
 
-        $keberangkatans = keberangkatan::where('user_id', $user)->with('bus')->get();
-
-        // foreach ($keberangkatans as $keberangkatan) {
-
-
-        //     var_dump(Carbon::parse($keberangkatan->keberangkatan)->format('h:i'));
-        //     exit;
-        // }
-
-
-        // return $keberangkatans->bus;
-        return view('Admin.Keberangkatan.index')->with('keberangkatans', $keberangkatans);
+        return view('Penumpang.Keberangkatan.Keberangkatan')->with([
+            'keberangkatans' => $keberangkatan,
+            'request'       => $request,
+        ]);
     }
 
 
     public function show($id)
     {
-        return view('Admin.Keberangkatan.detail', ['keberangkatan' => keberangkatan::findorFail($id)]);
     }
-
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //c
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        //
     }
 
     /**

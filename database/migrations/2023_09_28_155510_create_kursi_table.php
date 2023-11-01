@@ -13,9 +13,16 @@ return new class extends Migration
     {
         Schema::create('kursi', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('nama');
-            $table->string('penumpang_id');
-            $table->uuid('keberangkatan_id');
+            $table->string('nama')->nullable();
+            $table->uuid('penumpang_id')->nullable();
+            $table->uuid('keberangkatan_id')->nullable();
+
+            $table->foreign('penumpang_id')
+                ->references('id')
+                ->on('penumpang')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->foreign('keberangkatan_id')
                 ->references('id')
                 ->on('keberangkatan')

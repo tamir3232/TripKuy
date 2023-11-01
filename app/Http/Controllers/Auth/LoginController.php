@@ -43,8 +43,6 @@ class LoginController extends Controller
             return back()->with('error', ' Wrong Password/email');
         }
         if (Auth::attempt($credentials)) {
-
-
             $request->session()->regenerate();
             if (auth()->user()->role == '1') {
                 return redirect()->intended('/');

@@ -50,4 +50,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function penumpang()
+    {
+        return $this->hasMany(Penumpang::class, 'user_id', 'id');
+    }
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class, 'user_id', 'id');
+    }
+
+    public function keberangkatan()
+    {
+        return $this->hasMany(keberangkatan::class, 'user_id', 'id');
+    }
 }

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('keberangkatan', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('user_id');
+
             $table->string('from');
             $table->string('to');
             $table->uuid('bus_id');
-            $table->table('date');
+            $table->date('date');
             $table->string('price');
             $table->boolean('ac');
             $table->boolean('kamar_mandi');
@@ -30,11 +32,13 @@ return new class extends Migration
             $table->boolean('kursi_L');
             $table->boolean('kursi_xl');
             $table->boolean('kuris_xll');
+
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
             $table->foreign('bus_id')
                 ->references('id')
                 ->on('bus')

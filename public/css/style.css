@@ -130,3 +130,17 @@ p{
     background-color: #E9C46A;
 }
 
+.form-check{
+    display: inline-block;
+}
+
+
+
+
+
+
+.accordion-content {
+    display: none;
+    padding: 10px;
+    background-color: #E7E7E7;
+}

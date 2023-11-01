@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('ticket', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('code');
-            $table->uuid('penumpang_id');
-            $table->uuid('transaksi_id');
+            $table->string('code')->nullable();
+            $table->uuid('penumpang_id')->nullable();
+            $table->uuid('transaksi_id')->nullable();
 
             $table->foreign('penumpang_id')
                 ->references('id')
