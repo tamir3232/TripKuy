@@ -4,7 +4,12 @@
     @foreach ($datas as $data)
         <div class="container" style="border-radius: 20px; background-color:#E7E7E7; color:black">
             <p>{{ $data['bus']['nama'] }}</p>
+
             <div style=" display : flex; flex-direction : row;">
+                <div style="width: 250px">
+                    <p>{{ $data['keberangkatan']['user']->nama_loket }}</p>
+                </div>
+
                 <div style="text-align: center; width: 100%; display:flex; justify-content:center; align-items:center;">
                     <div style="display: inline-block; margin-right:50px">
                         <p style="text-align: center; ">{{ $data['keberangkatan']['from'] }} <br>
@@ -21,7 +26,9 @@
                 </div>
 
             </div>
+
             <div style=" display : flex; ">
+
                 <div style="width: 100%">
                     <p style="display: inline-block">
                         {{ \Carbon\Carbon::parse($data['keberangkatan']['date'])->format('d-M-Y') }}

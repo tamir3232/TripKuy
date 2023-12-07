@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class keberangkatan extends Model
 {
     use HasFactory, HasUuids;
@@ -42,7 +43,7 @@ class keberangkatan extends Model
 
     public function user()
     {
-        return $this->belongsTo(user::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
     public function bus()
     {

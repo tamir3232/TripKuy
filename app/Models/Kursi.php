@@ -27,4 +27,8 @@ class Kursi extends Model
     {
         return $this->belongsTo(keberangkatan::class, 'keberangkatan_id', 'id');
     }
+    public function ticket()
+    {
+        return $this->hasMany(Ticket::class, 'id');
+    }
 }

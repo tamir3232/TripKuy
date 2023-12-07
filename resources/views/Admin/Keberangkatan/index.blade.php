@@ -32,7 +32,8 @@
                         </p>
                     </div>
                     <div style=" width:100%;display:flex; justify-content:right; align-items:right";>
-                        <button type="button" class="btn btn-primary" style="background-color:#E76F51 "> Informasi</button>
+                        <button type="button" class="btn btn-primary" style="background-color:#E76F51 ">
+                            {{ $keberangkatan->status }}</button>
                     </div>
 
                 </div>

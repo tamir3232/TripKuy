@@ -8,11 +8,18 @@
         @endif
 
         <p>KODE TIKET : </p>
-        <p style="font-size: 16px">{{ $transaksi->code }}</p>
+        <p style="font-size: 16px; font-family:Arial, Helvetica, sans-serif">{{ $transaksi->code }}</p>
         <p>TOTAL PEMBAYARAN: </p>
-        <p style="font-size: 16px">Rp{{ $transaksi->total_price }}</p>
+        <p style="font-size: 16px;  font-family:Arial, Helvetica, sans-serif">Rp{{ $transaksi->total_price }}</p>
         <p>STATUS</p>
-        <p style="font-size: 16px">{{ $transaksi->status }}</p>
+        <p style="font-size: 16px;  font-family:Arial, Helvetica, sans-serif">{{ $transaksi->status }}</p>
+        <p>Bukti Pembayaran</p>
+        @if ($transaksi->attachment)
+            <div>
+                <img src="{{ asset('storage/post-image') . '/' . $transaksi->attachment }}" style="width: 100%;">
+            </div>
+        @endif
+
     </div>
     @if ($transaksi->attachment == null && $transaksi->status == 'Menunggu Pembayaran')
         <form action="/pembayaran" method="post" enctype="multipart/form-data">
@@ -40,14 +47,21 @@
 
         </form>
     @elseif ($transaksi->status == 'Pembayaran Diterima')
-        <table class="table container"style="background-color: white; border-radius:0; color:black; border:solid black;">
+        <table
+            class="table container"style="background-color: white; border-radius:0; color:black; border:solid black; font-family:arial">
             <thead>
                 <tr>
                     <th>NO</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Alamat</th>
                     <th scope="col">No.Wa</th>
+                    <th scope="col">Kota Asal</th>
+                    <th scope="col">Kota Tujuan</th>
+                    <th scope="col">Tanggal Keberangkatan</th>
+                    <th scope="col">Jam Keberangkatan</th>
+                    <th scope="col">No.Kursi</th>
                     <th style="width: 50px">email</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -58,6 +72,11 @@
                         <td>{{ $tiket->penumpang->name }}</td>
                         <td>{{ $tiket->penumpang->alamat }}</td>
                         <td>{{ $tiket->penumpang->no_wa }}</td>
+                        <td>{{ $transaksi->keberangkatan->from }}</td>
+                        <td>{{ $transaksi->keberangkatan->to }}</td>
+                        <td>{{ $transaksi->keberangkatan->date }}</td>
+                        <td>{{ $transaksi->keberangkatan->keberangkatan }}</td>
+                        <td>{{ $tiket->kursi->nama }}</td>
                         <td>{{ $tiket->penumpang->email }}</td>
                     </tr>
                 @endforeach

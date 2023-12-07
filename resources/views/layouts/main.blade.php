@@ -41,13 +41,16 @@
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="/keberangkatan">Keberangkatan</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/AdminPesanan">Pesanan</a>
+                            </li>
                         @endif
 
                         <li class="nav-item">
                             <form action="/logout" method="POST">
                                 @csrf
                                 <button type="submit" style="background: transparent; border:none !important; ">
-                                    <a class="nav-link" methhref="/logout">LogOut</a>
+                                    <a class="nav-link" methhref="/logout">Keluar</a>
                                 </button>
                                 {{-- <a class="nav-link" methhref="/logout">LogOut</a> --}}
                             </form>
@@ -55,10 +58,10 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/login">LOGIN</a>
+                            <a class="nav-link" aria-current="page" href="/login">MASUK</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/register">REGISTER</a>
+                            <a class="nav-link" href="/register">DAFTAR</a>
                         </li>
                     @endauth
 

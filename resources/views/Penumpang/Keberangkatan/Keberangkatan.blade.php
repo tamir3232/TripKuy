@@ -4,30 +4,41 @@
 @section('container')
     <div style="width: 100%; display:flex; justify-content:center; align-items:center;   ">
         <div class="containerr">
-            <h1>Keberangkatan</h1>
+            <h1 style="font-weight: normal">Keberangkatan</h1>
             <form class="row g-4" action="/list-keberangkatan" method="get">
                 <div class="col-md-3">
                     <label for="inputEmail4" class="form-label">Dari</label>
                     <select id="inputState" class="form-select" name="from">
+                        @php
+                            $cities = ['Banda Aceh', 'Medan', 'Pekan Baru', 'Palembang', 'Jambi', 'Lampung', 'Jakarta'];
+                        @endphp
                         <option selected>{{ $request->from }}</option>
-                        <option>...</option>
+                        @foreach ($cities as $city)
+                            @if ($city !== $request->from)
+                                <option value="{{ $city }}">{{ $city }}</option>
+                            @endif
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-md-3">
                     <label for="inputPassword4" class="form-label">Ke</label>
                     <select id="inputState" class="form-select" name="to">
+                        @php
+                            $cities = ['Banda Aceh', 'Medan', 'Pekan Baru', 'Palembang', 'Jambi', 'Lampung', 'Jakarta'];
+                        @endphp
                         <option selected>{{ $request->to }}</option>
-                        <option>...</option>
+                        @foreach ($cities as $city)
+                            @if ($city !== $request->to)
+                                <option value="{{ $city }}">{{ $city }}</option>
+                            @endif
+                        @endforeach
+                    </select>
                     </select>
                 </div>
                 <div class="col-3">
                     <label for="inputAddress" class="form-label">Tanggal Berangkat</label>
                     <input name="date" type="text" class="form-control" onfocus="(this.type='date')"
                         placeholder="{{ \Carbon\Carbon::parse($request->date)->format('m/d/Y') }}">
-                </div>
-                <div class="col-1">
-                    <label for="inputAddress2" class="form-label">Penumpang</label>
-                    <input name="penumpang" type="text" class="form-control" id="inputAddress2" placeholder="">
                 </div>
 
                 <div class="col-12">
@@ -45,11 +56,18 @@
                 <div class="accordion-title">
                     <p>{{ $keberangkatan->bus->nama }}</p>
                     <div style=" display : flex; flex-direction : row;">
+                        <div style="width: 250px">
+                            <p>{{ $keberangkatan->user->nama_loket }}</p>
+                        </div>
+
                         <div
                             style="text-align: center; width: 100%; display:flex; justify-content:center; align-items:center;">
                             <div style="display: inline-block; margin-right:50px">
                                 <p style="text-align: center; ">{{ $keberangkatan->from }} <br>
                                     {{ \Carbon\Carbon::parse($keberangkatan->keberangkatan)->format('H:i') }}</p>
+                            </div>
+                            <div>
+
                             </div>
                             <div style="display: inline-block">
                                 <p>{{ $keberangkatan->to }}
@@ -87,13 +105,6 @@
                                 <li style="display:inline-block; margin-right:20px">
                                     <div>
                                         <p>AC</p>
-                                    </div>
-                                </li>
-                            @endif
-                            @if ($keberangkatan->kamar_mandi == true)
-                                <li style="display:inline-block; margin-right:20px">
-                                    <div>
-                                        <p>KAMAR MANDI</p>
                                     </div>
                                 </li>
                             @endif

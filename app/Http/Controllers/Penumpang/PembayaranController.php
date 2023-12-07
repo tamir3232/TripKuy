@@ -16,6 +16,7 @@ class PembayaranController extends Controller
         $keberangkatan = session()->get('keberangkatan');
 
         // return $transaksi;
+
         return view('Penumpang.Keberangkatan.Pembayaran')->with([
             'transaksi' => $transaksi ?? $request->transaksii,
             'keberangkatan' => $keberangkatan ?? $request->keberangkatan,
@@ -25,8 +26,13 @@ class PembayaranController extends Controller
     public function show($id)
     {
         $transaksi = Transaksi::where('id', $id)->first();
+        if (auth()->user()->id != $transaksi->user_id) {
+            abort(403);
+        }
+        $transaksi->load('keberangkatan');
         $tiket = Ticket::where('transaksi_id', $transaksi->id)->get();
         $tiket->load('penumpang');
+        $tiket->load('kursi');
 
         // $keberangkatan = session()->get('keberangkatan');
 

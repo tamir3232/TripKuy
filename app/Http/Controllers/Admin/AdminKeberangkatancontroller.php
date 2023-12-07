@@ -39,7 +39,7 @@ class AdminKeberangkatancontroller extends Controller
             'date'              => $request->date,
             'price'             => $request->price,
             'ac'                => $request->ac ?? false,
-            'kamar_mandi'       => $request->kamar_mandi ?? false,
+            'kamar_mandi'       => $request->toilet ?? false,
             'tv'                => $request->tv ?? false,
             'sleeper'           => $request->sleeper ?? false,
             'wifi'              => $request->wifi ?? false,
@@ -72,7 +72,15 @@ class AdminKeberangkatancontroller extends Controller
      */
     public function show($id)
     {
-        
+        $Keberangkatan = keberangkatan::where('id', $id)->first();
+        if (auth()->user()->id != $Keberangkatan->user_id) {
+            abort(403);
+        }
+        $bus = Bus::get();
+        return view('Admin.Keberangkatan.formEdit')->with([
+            'keberangkatan' => $Keberangkatan,
+            'bus' => $bus,
+        ]);
     }
 
     /**
@@ -88,7 +96,35 @@ class AdminKeberangkatancontroller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $Keberangkatan = keberangkatan::where('id', $id)->first();
+        $Keberangkatan->update([
+
+            'from'              => $request->from ?? $Keberangkatan->from,
+            'to'                => $request->to ?? $Keberangkatan->to,
+            'bus_id'            => $request->bus ?? $Keberangkatan->bus,
+            'date'              => $request->date ?? $Keberangkatan->date,
+            'price'             => $request->price ?? $Keberangkatan->price,
+            'ac'                => $request->ac ?? false,
+            'kamar_mandi'       => $request->kamar_mandi ?? false,
+            'tv'                => $request->tv ?? false,
+            'sleeper'           => $request->sleeper ?? false,
+            'wifi'              => $request->wifi ?? false,
+            'charging_station'  => $request->charging_station ?? false,
+            'bantal'            => $request->bantal ?? false,
+            'selimut'           => $request->selimut ?? false,
+            'bagasi'            => $request->bagasi ?? false,
+            'selimut'           => $request->selimut ?? false,
+            'kursi_L'           => $request->kursi_l ?? false,
+            'kursi_xl'          => $request->kursi_xl ?? false,
+            'kuris_xll'         => $request->kursi_xll ?? false,
+            'status'            => 'ONGOING',
+            'keberangkatan'     => $request->keberangkatan ?? false,
+            'sampai'            => $request->sampai ?? false,
+        ]);
+
+
+        return redirect('/keberangkatan');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminKeberangkatancontroller;
+use App\Http\Controllers\Admin\Transaksi\AdminTransaksiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\registerController;
 use App\Http\Controllers\Home\HomeController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Penumpang\ListKeberangkatanController;
 use App\Http\Controllers\Penumpang\MyticketController;
 use App\Http\Controllers\Penumpang\PembayaranController;
 use App\Http\Controllers\Penumpang\ticketController;
+use App\Http\Controllers\Prediction\PredictionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,27 +51,30 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 
 Route::resource('/', HomeController::class);
-
-Route::resource('/admin', AdminController::class);
-Route::resource('/keberangkatan', KeberangkatanController::class);
-Route::resource('/form-keberangkatan', AdminKeberangkatancontroller::class);
-Route::resource('/kursi', KursiController::class);
-Route::resource('/pembayaran', PembayaranController::class);
-Route::resource('/my-ticket', MyticketController::class);
-Route::resource('/ticket', ticketController::class);
-
-
-
-
-
-
-
-
-//penumpang
-
-
 Route::resource('/list-keberangkatan', ListKeberangkatanController::class);
-Route::resource('/form-pesanan', FormPesananController::class);
+//penumpang
+Route::middleware(['buyer'])->group(function () {
+    Route::resource('/kursi', KursiController::class);
+    Route::resource('/pembayaran', PembayaranController::class);
+    Route::resource('/my-ticket', MyticketController::class);
+    Route::resource('/ticket', ticketController::class);
+
+    Route::resource('/form-pesanan', FormPesananController::class);
+});
+
+
+
+
+
+
+
+
+//penjual
+Route::resource('/admin', AdminController::class)->middleware('admin');
+Route::resource('/keberangkatan', KeberangkatanController::class)->middleware('admin');
+Route::resource('/AdminPesanan', AdminTransaksiController::class)->middleware('admin');
+Route::resource('/form-keberangkatan', AdminKeberangkatancontroller::class)->middleware('admin');;
+Route::get('/prediction', [PredictionController::class, 'index'])->middleware('admin');
 
 
 

@@ -75,6 +75,7 @@ class FormPesananController extends Controller
                 'code' => $transaksi->code,
                 'penumpang_id' => $penumpang->id,
                 'transaksi_id' => $transaksi->id,
+                'kursi_id'  => $kursi->id,
             ]);
         }
 

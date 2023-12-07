@@ -1,7 +1,10 @@
 @extends('layouts.main')
 
-
+@php
+    $i = 1;
+@endphp
 @section('container')
+    {{-- {{ var_dump($penumpang) }} --}}
     <div class="container" style="border-radius: 20px; background-color:#E7E7E7; color:black">
         <p>{{ $keberangkatan->bus->nama }}</p>
         <div style=" display : flex; flex-direction : row;">
@@ -26,54 +29,102 @@
                 <p style="display: inline-block">{{ \Carbon\Carbon::parse($keberangkatan->date)->format('d-M-Y') }}</p>
             </div>
             <div style=" width:100%;display:flex; justify-content:right; align-items:right";>
-                <button type="button" class="btn btn-primary" style="background-color:#E76F51 "> Informasi</button>
+                @if ($keberangkatan->status == 'ONGOING')
+                    <button type="button" class="btn btn-primary" style="background-color:#E76F51; margin-right:20px"
+                        id="">
+                        <a href="/form-keberangkatan/{{ $keberangkatan->id }}"
+                            style="text-decoration: none; color:white">PERBARUI </a></button>
+                @endif
+
+                <button type="button" class="btn btn-primary" style="background-color:#E76F51" id="showConfirmationModal">
+                    {{ $keberangkatan->status }}</button>
+
             </div>
 
         </div>
     </div>
     <div style="width: 100%; display:flex; justify-content:center; align-items:center; margin-top:20px;">
-        <table class="table caption-top" style="border-block: 20px">
-            <caption>List of users</caption>
+        <table
+            class="table"style="background-color: white; border-radius:0; color:black; border:solid black;  font-family:Arial, Helvetica, sans-serif">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Handle</th>
+                    <th>NO</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Alamat</th>
+                    <th scope="col">No.Wa</th>
+                    <th>email</th>
+                    <th>code</th>
+                    <th>kursi</th>
+                    <th>status</th>
                 </tr>
             </thead>
+
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
+                @if ($penumpang)
+                    @foreach ($penumpang as $p)
+                        <tr>
+                            <th scope="row">{{ $i++ }}</th>
+                            <td> {{ $p['penumpang']['name'] }}</td>
+                            <td>{{ $p['penumpang']['alamat'] }}</td>
+                            <td>{{ $p['penumpang']['no_wa'] }}</td>
+                            <td>{{ $p['penumpang']['email'] }}</td>
+                            <td>{{ $p['transaksi']['code'] }}</td>
+                            <td>{{ $p['kursi'] }}</td>
+                            <td>{{ $p['transaksi']['status'] }}</td>
+                        </tr>
+                    @endforeach
+                @endif
+
             </tbody>
         </table>
     </div>
+
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Perubahan Status</h5>
+                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> --}}
+                </div>
+                <div class="modal-body">
+                    Apakah Keberangkatan Telah Selesai
+                </div>
+                <div class="modal-footer">
+
+
+                    <button type="submit" class="btn btn-secondary" id="cancel" data-dismiss="modal">Batal</button>
+
+                    <form action="/keberangkatan/{{ $keberangkatan->id }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="status" value="COMPLETE">
+                        <button type="submit" class="btn btn-primary" id="confirmStatusChange">Keberangkatan Telah
+                            Selesai</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#showConfirmationModal').click(function() {
+                $('#confirmationModal').modal('show');
+            });
+            $('#cancel').click(function() {
+                $('#confirmationModal').modal('hide');
+            });
+
+
+
+        });
+    </script>
+
 @endsection

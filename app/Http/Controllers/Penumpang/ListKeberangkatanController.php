@@ -11,7 +11,8 @@ class ListKeberangkatanController extends Controller
     public function index(Request $request)
     {
         $keberangkatan = keberangkatan::where('from', $request->from)->where('to', $request->to)->where('date', $request->date)->get();
-
+        $keberangkatan->load('user');
+        
         return view('Penumpang.Keberangkatan.Keberangkatan')->with([
             'keberangkatans' => $keberangkatan,
             'request'       => $request,

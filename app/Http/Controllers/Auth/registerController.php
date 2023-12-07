@@ -47,6 +47,8 @@ class registerController extends Controller
             'password' => bcrypt($request->password) ?? NULL,
             'alamat' => $request->alamat ?? NULL,
             'role' => $request->role ?? NULL,
+            'no_rek' => $request->no_rekening ?? NULL,
+            'nama_loket' => $request->nama_loket ?? NULL,
         ]);
 
         session()->flash('Success', 'Registration successfull');

@@ -18,6 +18,7 @@ class Ticket extends Model
         'status',
         'penumpang_id',
         'transaksi_id',
+        'kursi_id'
     ];
     public function penumpang()
     {
@@ -26,5 +27,9 @@ class Ticket extends Model
     public function transaksi()
     {
         return $this->belongsTo(Transaksi::class, 'transaksi_id', 'id');
+    }
+    public function kursi()
+    {
+        return $this->belongsTo(Kursi::class, 'kursi_id', 'id');
     }
 }

@@ -20,6 +20,7 @@ class MyticketController extends Controller
         $data = [];
         foreach ($transaksis as $transaksi) {
             $keberangkatan = keberangkatan::where('id', $transaksi->keberangkatan_id)->first();
+            $keberangkatan->load('user');
             if ($keberangkatan) {
                 $bus = Bus::orwhere('id', $keberangkatan->bus_id)->first();
                 $data[] = [

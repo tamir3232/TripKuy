@@ -15,6 +15,9 @@ class KursiController extends Controller
     public function index(Request $request)
     {
         $keberangkatan = keberangkatan::where('id', $request->keberangkatan_id)->first();
+        if (!$keberangkatan) {
+            abort(403);
+        }
         $kursis = Kursi::where('keberangkatan_id', $keberangkatan->id)->orderBy('nama')->get();
         // return $kursis;
         return view('Penumpang.Keberangkatan.kursi')->with([

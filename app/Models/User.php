@@ -29,6 +29,8 @@ class User extends Authenticatable
         'password',
         'alamat',
         'role',
+        'no_rek',
+        'nama_loket'
     ];
 
     /**

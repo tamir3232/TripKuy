@@ -3,78 +3,69 @@
 
 @section('container')
     <div class="card-group ">
-        <div class="card container" style="margin: 20px; border-radius:20px; text-decoration:none;" href="/Admin/">
+        <a class="card container" style="margin: 20px; border-radius:20px; text-decoration:none;"
+            href="/AdminPesanan?status=Pengecekan Pembayaran">
             <div class="card-body">
-
                 <h3 class="card-text" style="text-align: center">Pesanan Baru</h3>
-                <h1 class="card-title" style="text-align: center">99+</h1>
+                <h1 class="card-title" style="text-align: center">{{ $pesananBaru }}</h1>
             </div>
-        </div>
-        <div class="card container" style="margin: 20px; border-radius:20px; text-decoration:none;" href="google.com">
+        </a>
+
+        <a class="card container" style="margin: 20px; border-radius:20px; text-decoration:none;"
+            href="/AdminPesanan?status=Pembayaran Diterima">
             <div class="card-body">
                 <h3 class="card-text" style="text-align: center">Pesanan Selesai</h3>
-                <h1 class="card-title" style="text-align: center">99+</h1>
+                <h1 class="card-title" style="text-align: center">{{ $pesananSelesai }}</h1>
 
             </div>
-        </div>
-        <div class="card container" style="margin: 20px; border-radius:20px; text-decoration:none;" href="/keberangkatan">
+        </a>
+        <a class="card container" style="margin: 20px; border-radius:20px; text-decoration:none;"
+            href="/keberangkatan?status=ONGOING">
             <div class="card-body">
                 <h3 class="card-text" style="text-align: center">Keberangkatan Tersedia</h3>
-                <h1 class="card-title" style="text-align: center">99+</h1>
+                <h1 class="card-title" style="text-align: center">{{ $keberangaktanTersedia }}</h1>
 
             </div>
-        </div>
-        <div class="card container" style="margin: 20px; border-radius:20px; text-decoration:none;" href="google.com">
+        </a>
+        <a class="card container" style="margin: 20px; border-radius:20px; text-decoration:none;"
+            href="/keberangkatan?status=COMPLETE">
             <div class="card-body">
                 <h3 class="card-text" style="text-align: center">Keberangkatan Selesai</h3>
-                <h1 class="card-title" style="text-align: center">99+</h1>
+                <h1 class="card-title" style="text-align: center">{{ $keberangaktanSelesai }}</h1>
+                </h1>
             </div>
-        </div>
+        </a>
     </div>
 
-    <div style="width: 100%; display:flex; justify-content:center; align-items:center; margin-top:20px;">
-        <table class="table caption-top" style="border-block: 20px">
-            <caption>List of users</caption>
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Handle</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+
+    <div id="grafik"></div>
+
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        var tanggal = <?php echo json_encode($tanggal_transaksi); ?>;
+        var total = <?php echo json_encode($total_transaksi); ?>;
+
+        Highcharts.chart('grafik', {
+            title: {
+                text: ' TOTAL PEMESANAN SELESAI HARIAN'
+            },
+            xAxis: {
+                categories: tanggal
+            },
+            yAxis: {
+
+                title: {
+                    text: 'Total Pemesanan Harian'
+                },
+                allowDecimals: false, // Mengatur agar tidak ada desimal pada sumbu Y
+                tickInterval: 1 // Mengatur interval untuk label sumbu Y (misalnya, setiap 1 angka)
+            },
+            series: [{
+                name: 'TANGGAL',
+                data: total
+            }]
+
+        });
+    </script>
 @endsection

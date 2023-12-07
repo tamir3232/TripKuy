@@ -5,32 +5,44 @@
     @include('layouts.caraousel')
 
     <div
-        style="width: 100%; display:flex; justify-content:center; align-items:center; margin-top:-120px;  position: absolute;">
+        style="width: 100%; display:flex; justify-content:center; align-items:center; margin-top:-600px;  position: absolute;">
         <div class="containerr">
             <h1>Keberangkatan</h1>
-            <form class="row g-4" action="/list-keberangkatan" method="get">
+            <form class="row g-4" style="margin-left:60px" action="/list-keberangkatan" method="get">
                 <div class="col-md-3">
                     <label for="inputEmail4" class="form-label">Dari</label>
-                    <select id="inputState" class="form-select" name="from">
+                    <select id="inputState" class="form-select" name="from"
+                        style="font-family: Arial, Helvetica, sans-serif">
+                        <option value="" disabled selected style="display:none;"> </option>
                         <option value="Banda Aceh">Banda Aceh</option>
                         <option value="Medan">Medan</option>
+                        <option value="Pekan Baru">Pekan Baru</option>
+                        <option value="Palembang">Palembang</option>
+                        <option value="Jambi">Jambi</option>
+                        <option value="Lampung">Lampung</option>
+                        <option value="Jakarta">Jakarta</option>
                     </select>
                 </div>
                 <div class="col-md-3">
                     <label for="inputPassword4" class="form-label">Ke</label>
-                    <select id="inputState" class="form-select" name="to">
+                    <select id="inputState" class="form-select" name="to"
+                        style="font-family: Arial, Helvetica, sans-serif">
+                        <option value="" disabled selected style="display:none;"> </option>
                         <option value="Banda Aceh">Banda Aceh</option>
                         <option value="Medan">Medan</option>
+                        <option value="Pekan Baru">Pekan Baru</option>
+                        <option value="Palembang">Palembang</option>
+                        <option value="Jambi">Jambi</option>
+                        <option value="Lampung">Lampung</option>
+                        <option value="Jakarta">Jakarta</option>
                     </select>
                 </div>
                 <div class="col-3">
                     <label for="inputAddress" class="form-label">Tanggal Berangkat</label>
-                    <input type="date" class="form-control" id="inputAddress" name="date">
+                    <input type="date" class="form-control" id="inputAddress" name="date"
+                        style="font-family: Arial, Helvetica, sans-serif">
                 </div>
-                <div class="col-1">
-                    <label for="inputAddress2" class="form-label">Penumpang</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="" name="penumpang">
-                </div>
+
 
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Cari</button>

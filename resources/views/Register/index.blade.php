@@ -104,6 +104,20 @@
                         <option value="2">Penjual</option>
                     </select>
                 </div>
+                <!-- ... Bagian form lainnya ... -->
+
+                <div class="form-floating" id="no-rekening">
+                    <p for="floatingInput">No Rekening</p>
+                    <input type="text" name="no_rekening" class="form-control" id="floatingInputNoRek">
+                </div>
+
+                <div class="form-floating" id="nama-loket">
+                    <p for="floatingInput">Nama Loket</p>
+                    <input type="text" name="nama_loket" class="form-control" id="floatingInputNamaLoket">
+                </div>
+
+                <!-- ... Bagian form lainnya ... -->
+
                 <div class="form-floating">
                     <p for="floatingInput">Password</p>
                     <input type="password" name="password" class="form-control @error('password')is-invalid @enderror"
@@ -113,4 +127,26 @@
             </form>
         </main>
     </div>
+    <!-- Letakkan di bagian bawah halaman HTML -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Sembunyikan kolom input awalnya
+            $('#no-rekening, #nama-loket').hide();
+
+            // Tangkap perubahan pada dropdown
+            $('#inputGroupSelect01').change(function() {
+                // Ambil nilai yang dipilih
+                var selectedValue = $(this).val();
+
+                // Jika yang dipilih adalah 'Penjual', tampilkan kolom input 'No Rekening' dan 'Nama Loket'
+                if (selectedValue === '2') {
+                    $('#no-rekening, #nama-loket').show();
+                } else {
+                    // Sembunyikan kolom input jika yang dipilih bukan 'Penjual'
+                    $('#no-rekening, #nama-loket').hide();
+                }
+            });
+        });
+    </script>
 @endsection

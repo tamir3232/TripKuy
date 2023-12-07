@@ -12,7 +12,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        if (!auth()->check()) {
+            return view('home.index');
+        }
+        if (auth()->check()) {
+            if (auth()->user()->role == 1 || !auth()->check()) {
+                return view('home.index');
+            }
+            if (auth()->user()->role == 2 || !auth()->check()) {
+                return redirect('/admin');
+            }
+        }
     }
 
     /**
